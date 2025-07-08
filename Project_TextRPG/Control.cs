@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace Project_TextRPG
 {
-
-
-
     enum InputKey
     {
         Up, Down, Left, Right, Z, X

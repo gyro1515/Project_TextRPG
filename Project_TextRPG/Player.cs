@@ -95,6 +95,8 @@ namespace Project_TextRPG
         }
 
         // 아래 씬관련을 모두 다 씬으로?
+        // 키 입력은 플레이어에 구현하는 게 맞지 않나?
+        // 씬에 구현하는 게 더 편하고, 덜 신경쓸 거 같긴 함
         public void StartScene()
         {
             ShowCtl();
