@@ -1,5 +1,4 @@
-﻿//using Project_TextRPG.Scene;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,20 +27,11 @@ namespace Project_TextRPG
             inventory = new List<Item>();
             equipments = new Dictionary<Item.ItemType, Item>();
 
-            //scenes = new List<Scene>();
-            //scenes.Add(new StartScene());
-            //scenes.Add(new StateScene());
-            //scenes.Add(new InventoryScene());
-            //scenes.Add(new EquipmentScene());
-            //scenes.Add(new ShopScene());
-            //scenes.Add(new BuyScene());
-
             // Dictionary로 구현해보기
             scenesDTY = new Dictionary<SceneState, Scene>();
             scenesDTY.Add(SceneState.StartScene, new StartScene());
             scenesDTY.Add(SceneState.StateScene, new StatScene());
             scenesDTY.Add(SceneState.InventoryScene, new InventoryScene());
-            //scenesDTY.Add(SceneState.EquipmentScene, new EquipmentScene());
             scenesDTY.Add(SceneState.ShopScene, new ShopScene());
             scenesDTY.Add(SceneState.SellScene, new SellScene());
             scenesDTY.Add(SceneState.Rest, new RestScene());
@@ -73,7 +63,6 @@ namespace Project_TextRPG
         // 출력 후 대기 시간
         int sleepTime = 800;
 
-
         // 플레이어 능력치
         public int Lv { get; set; }
         public string Name { get; set; }
@@ -98,37 +87,6 @@ namespace Project_TextRPG
             while (true)
             {
                 scenesDTY[sceneState].ShowScene(selNum);
-                /*switch (sceneState)
-                {
-                    case SceneState.StartScene:
-                        scenesDTY[SceneState.StartScene].ShowScene(selNum);
-                        StartScene();
-                        break;
-                    case SceneState.StateScene:
-                        scenesDTY[SceneState.StateScene].ShowScene(selNum);
-                        StateScene();
-                        break;
-                    case SceneState.InventoryScene:
-                        scenesDTY[SceneState.InventoryScene].ShowScene(selNum);
-                        InventoryScene();
-                        break;
-                    case SceneState.ShopScene:
-                        scenesDTY[SceneState.ShopScene].ShowScene(selNum);
-                        ShopScene();
-                        break;
-                    case SceneState.SellScene:
-                        scenesDTY[SceneState.SellScene].ShowScene(selNum);
-                        SellScene();
-                        break;
-                    case SceneState.Dungeon:
-                        break;
-                    case SceneState.Rest:
-                        scenesDTY[SceneState.Rest].ShowScene(selNum);
-                        RestScene();
-                        break;
-                    default:
-                        break;
-                }*/
                 Console.Clear();
             }
 
