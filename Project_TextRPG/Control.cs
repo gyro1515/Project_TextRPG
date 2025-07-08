@@ -71,5 +71,24 @@ namespace Project_TextRPG
             }
             return inputkey;
         }
+
+        // 콘솔 출력 너비 맞추기용
+        public int GetDisplayWidth(string s)
+        {
+            int width = 0;
+            foreach (char c in s)
+            {
+                if (IsKorean(c))
+                    width += 2;
+                else
+                    width += 1;
+            }
+            return width;
+        }
+        public bool IsKorean(char c)
+        {
+            // 한글 완성형 범위: U+AC00 ~ U+D7A3
+            return c >= 0xAC00 && c <= 0xD7A3;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿//using Project_TextRPG.Scene;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,10 @@ namespace Project_TextRPG
             Name = "Unknown";
             Atk = 10;
             Def = 5;
-            HP = 100;
-            Gold = 100000;
+            MaxHP = 100;
+            //CurHP = MaxHP;
+            CurHP = 40;
+            Gold = 5000;
             PlusAtk = 0;
             PlusDef = 0;
             PlusHP = 0;
@@ -36,12 +39,12 @@ namespace Project_TextRPG
             // Dictionary로 구현해보기
             scenesDTY = new Dictionary<SceneState, Scene>();
             scenesDTY.Add(SceneState.StartScene, new StartScene());
-            scenesDTY.Add(SceneState.StateScene, new StateScene());
+            scenesDTY.Add(SceneState.StateScene, new StatScene());
             scenesDTY.Add(SceneState.InventoryScene, new InventoryScene());
             //scenesDTY.Add(SceneState.EquipmentScene, new EquipmentScene());
             scenesDTY.Add(SceneState.ShopScene, new ShopScene());
             scenesDTY.Add(SceneState.SellScene, new SellScene());
-            //scenesDTY.Add(SceneState.BuyScene, new BuyScene());
+            scenesDTY.Add(SceneState.Rest, new RestScene());
         }
 
         public static Player Instance
@@ -55,7 +58,7 @@ namespace Project_TextRPG
 
         enum SceneState
         {
-            StartScene, StateScene,InventoryScene, ShopScene, SellScene
+            StartScene, StateScene,InventoryScene, ShopScene, SellScene, Dungeon, Rest
         }
 
         private SceneState sceneState = SceneState.StartScene;
@@ -67,6 +70,8 @@ namespace Project_TextRPG
         public List<Item> inventory;
         // 장비창, 한 종류의 아이템만 장착하기
         public Dictionary<Item.ItemType, Item> equipments;
+        // 출력 후 대기 시간
+        int sleepTime = 800;
 
 
         // 플레이어 능력치
@@ -74,7 +79,8 @@ namespace Project_TextRPG
         public string Name { get; set; }
         public int Atk { get; set; }
         public int Def { get; set; }
-        public int HP { get; set; }
+        public int MaxHP { get; set; }
+        public int CurHP { get; set; }
         public int Gold { get; set; }
         // 장비 장착시 추가되는 능령치
         public int PlusAtk { get; set; }
@@ -84,11 +90,15 @@ namespace Project_TextRPG
         // UI 선택표시용
         int selNum = 0;
         
+
+        
         public void StartGame()
         {
+            // 모든 씬 생성하고 상황에 따라 씬 옮기기
             while (true)
             {
-                switch (sceneState)
+                scenesDTY[sceneState].ShowScene(selNum);
+                /*switch (sceneState)
                 {
                     case SceneState.StartScene:
                         scenesDTY[SceneState.StartScene].ShowScene(selNum);
@@ -110,14 +120,24 @@ namespace Project_TextRPG
                         scenesDTY[SceneState.SellScene].ShowScene(selNum);
                         SellScene();
                         break;
+                    case SceneState.Dungeon:
+                        break;
+                    case SceneState.Rest:
+                        scenesDTY[SceneState.Rest].ShowScene(selNum);
+                        RestScene();
+                        break;
                     default:
                         break;
-                }
+                }*/
                 Console.Clear();
             }
+
+            // 상황에 따라 씬 생성, 기존 씬 제거하는 방식으로 바꾸기??
+            // 현재 약 11MB 사용
         }
 
-        void StartScene()
+        // 아래 씬관련을 모두 다 씬으로?
+        public void StartScene()
         {
             ShowCtl();
             switch (InputKey)
@@ -126,21 +146,28 @@ namespace Project_TextRPG
                     if (selNum != 0) selNum--;
                     break;
                 case InputKey.Down:
-                    if (selNum != 2) selNum++;
+                    if (selNum != scenesDTY[SceneState.StartScene].OptionsLen - 1) selNum++;
                     break;
                 case InputKey.Z:
                     switch (selNum)
                     {
-                        case 0:
+                        case 0: // 스텟 보기
                             sceneState = SceneState.StateScene;
                             break;
-                        case 1:
+                        case 1: // 인벤토리
                             sceneState = SceneState.InventoryScene;
                             // 인벤토리 출력 세팅
                             ((InventoryScene)scenesDTY[SceneState.InventoryScene]).SetInventoryString();
                             break;
-                        case 2:
+                        case 2: // 상점
                             sceneState = SceneState.ShopScene;
+                            break;
+                        case 3: // 던전
+                            Console.WriteLine("던전 입장!!! 미구현");
+                            Thread.Sleep(sleepTime);
+                            break;
+                        case 4: // 휴식하기
+                            sceneState = SceneState.Rest;
                             break;
                         default:
                             break;
@@ -153,7 +180,7 @@ namespace Project_TextRPG
                     break;
             }
         }
-        void StateScene()
+        public void StatScene()
         {
             ShowCtl();
             switch (InputKey)
@@ -168,7 +195,7 @@ namespace Project_TextRPG
                     break;
             }
         }
-        void InventoryScene()
+        public void InventoryScene()
         {
             ShowCtl();
             switch (InputKey)
@@ -223,8 +250,8 @@ namespace Project_TextRPG
                     break;
             }
         }
-        
-        void ShopScene()
+
+        public void ShopScene()
         {
             ShowCtl();
             switch (InputKey)
@@ -274,7 +301,7 @@ namespace Project_TextRPG
                     break;
             }
         }
-        void SellScene()
+        public void SellScene()
         {
             ShowCtl();
             switch (InputKey)
@@ -310,6 +337,43 @@ namespace Project_TextRPG
                     break;
                 case InputKey.X:
                     sceneState = SceneState.ShopScene;
+                    // 선택 다시 초기화
+                    selNum = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void RestScene()
+        {
+            ShowCtl();
+            switch (InputKey)
+            {
+                case InputKey.Up:
+                    if (selNum != 0) selNum--;
+                    break;
+                case InputKey.Down:
+                    if (selNum != scenesDTY[SceneState.Rest].OptionsLen - 1) selNum++;
+                    break;
+                case InputKey.Z:
+                    // 선택
+                    switch (selNum)
+                    {
+                        case 0: // 휴식
+                            ((RestScene)scenesDTY[SceneState.Rest]).RestAndRecover();
+                            
+                            break;
+                        case 1: // 나가기
+                            sceneState = SceneState.StartScene;
+                            break;
+                        default:
+                            break;
+                    }
+                    // 선택 다시 초기화
+                    selNum = 0;
+                    break;
+                case InputKey.X:
+                    sceneState = SceneState.StartScene;
                     // 선택 다시 초기화
                     selNum = 0;
                     break;
