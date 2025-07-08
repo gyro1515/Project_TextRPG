@@ -6,13 +6,29 @@ using System.Threading.Tasks;
 
 namespace Project_TextRPG
 {
+
+
+
     enum InputKey
     {
         Up, Down, Left, Right, Z, X
     }
 
-    internal class Control
+    internal class ControlManager
     {
+        private static ControlManager? instance;
+        private ControlManager() { }
+
+        public static ControlManager Instance
+        {
+            get
+            {
+                if (instance == null) instance = new ControlManager();
+
+                return instance;
+            }
+        }
+
         InputKey inputkey;
 
         public InputKey GetKey()
@@ -23,34 +39,34 @@ namespace Project_TextRPG
             switch (keyInfo.Key)
             {
                 case ConsoleKey.UpArrow:
-                    Console.WriteLine("↑ 위쪽 방향키 입력됨");
+                    //Console.WriteLine("↑ 위쪽 방향키 입력됨");
                     inputkey = InputKey.Up;
                     break;
                 case ConsoleKey.DownArrow:
-                    Console.WriteLine("↓ 아래쪽 방향키 입력됨");
+                    //Console.WriteLine("↓ 아래쪽 방향키 입력됨");
                     inputkey = InputKey.Down;
                     break;
                 case ConsoleKey.LeftArrow:
-                    Console.WriteLine("← 왼쪽 방향키 입력됨");
+                    //Console.WriteLine("← 왼쪽 방향키 입력됨");
                     inputkey = InputKey.Left;
                     break;
                 case ConsoleKey.RightArrow:
-                    Console.WriteLine("→ 오른쪽 방향키 입력됨");
+                    //Console.WriteLine("→ 오른쪽 방향키 입력됨");
                     inputkey = InputKey.Right;
                     break;
                 case ConsoleKey.Escape:
-                    Console.WriteLine("종료합니다.");
+                    //Console.WriteLine("종료합니다.");
                     break;
                 case ConsoleKey.Z:
-                    Console.WriteLine("z");
+                    //Console.WriteLine("z");
                     inputkey = InputKey.Z;
                     break;
                 case ConsoleKey.X:
-                    Console.WriteLine("x");
+                    //Console.WriteLine("x");
                     inputkey = InputKey.X;
                     break;
                 default:
-                    Console.WriteLine($"다른 키 입력됨: {keyInfo.Key}");
+                    //Console.WriteLine($"다른 키 입력됨: {keyInfo.Key}");
                     break;
             }
             return inputkey;

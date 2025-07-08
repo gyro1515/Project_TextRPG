@@ -4,9 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Player player = new Player();
-            player.Name = "LEE";
-            player.StartGame();
+            Player.Instance.Name = "LEE";
+            Player.Instance.StartGame();
         }
     }
 }
