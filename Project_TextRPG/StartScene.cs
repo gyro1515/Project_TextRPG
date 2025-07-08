@@ -19,6 +19,24 @@ namespace Project_TextRPG
         }
         public override void ShowScene(int selNum)
         {
+            /*ScreenManager.Instance.Print(0, 1, "원진 마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
+            ScreenManager.Instance.Print(0, 2, "");
+            // 선택 표시
+            for (int i = 0; i < optionsLen; i++)
+            {
+                if (i == selNum)
+                {
+                    ScreenManager.Instance.Print(0, 3 + i, "▶ " + options[i]);
+                }
+                else
+                {
+                    ScreenManager.Instance.Print(0, 3 + i, "　 " + options[i]);
+                }
+            }
+            ScreenManager.Instance.Print(0, 3 + optionsLen, "");
+            ScreenManager.Instance.Print(0, 4 + optionsLen, "이동: 방향키, 선택: z, 취소: x");*/
+
+
             Console.WriteLine("원진 마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
             Console.WriteLine();
 

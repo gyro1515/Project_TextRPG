@@ -30,7 +30,7 @@ namespace Project_TextRPG
 
         public InputKey GetKey()
         {
-            ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
             // 방향키 확인
             switch (keyInfo.Key)

@@ -86,7 +86,10 @@ namespace Project_TextRPG
             // 모든 씬 생성하고 상황에 따라 씬 옮기기
             while (true)
             {
+                // 버블 버퍼링을 구현하고 싶었으나, 포기...
+                //ScreenManager.Instance.Clear();
                 scenesDTY[sceneState].ShowScene(selNum);
+                //ScreenManager.Instance.Flip();
                 Console.Clear();
             }
 
