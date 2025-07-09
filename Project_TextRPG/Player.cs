@@ -17,12 +17,16 @@ namespace Project_TextRPG
             Atk = 10;
             Def = 5;
             MaxHP = 100;
-            //CurHP = MaxHP;
-            CurHP = 40;
             Gold = 15000;
             PlusAtk = 0;
             PlusDef = 0;
             PlusHP = 0;
+            TotalAtk = Atk + PlusAtk;
+            TotalDef = Def + PlusDef;
+            TotalMaxHp = MaxHP + PlusHP;
+            // 현재 체력 세팅
+            //CurHP = TotalMaxHp;
+            CurHP = 40;
 
             inventory = new List<Item>();
             equipments = new Dictionary<Item.ItemType, Item>();
@@ -67,6 +71,9 @@ namespace Project_TextRPG
         public int PlusAtk { get; set; }
         public int PlusDef { get; set; }
         public int PlusHP { get; set; }
+        public int TotalAtk { get; set; }
+        public int TotalDef { get; set; }
+        public int TotalMaxHp { get; set; }
         
         public void SetAbilityByEquipment()
         {
@@ -93,8 +100,11 @@ namespace Project_TextRPG
                         break;
                 }
             }
+            TotalAtk = Atk + PlusAtk;
+            TotalDef = Def + PlusDef;
+            TotalMaxHp = MaxHP + PlusHP;
             // 플레이어의 현재 체력은 최대 체력에 의해 결정되게끔
-            CurHP = CurHP > MaxHP + PlusHP ? MaxHP + PlusHP : CurHP;
+            CurHP = CurHP > TotalMaxHp ? TotalMaxHp : CurHP;
         }
     }
 }
