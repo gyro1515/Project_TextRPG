@@ -97,7 +97,7 @@ namespace Project_TextRPG
                 switch (tP.inventory[i].Stat)
                 {
                     case Item.ItemStat.Hp:
-                        itemStat = "체력　";
+                        itemStat = "체력";
                         break;
                     case Item.ItemStat.Atk:
                         itemStat = "공격력";

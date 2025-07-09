@@ -8,7 +8,7 @@ namespace Project_TextRPG
 {
     enum InputKey
     {
-        Up, Down, Left, Right, Z, X
+        Up, Down, Left, Right, Z, X, None
     }
 
     internal class ControlManager
@@ -64,6 +64,8 @@ namespace Project_TextRPG
                     break;
                 default:
                     //Console.WriteLine($"다른 키 입력됨: {keyInfo.Key}");
+                    inputkey = InputKey.None;
+
                     break;
             }
             return inputkey;

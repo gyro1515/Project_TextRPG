@@ -40,6 +40,7 @@ namespace Project_TextRPG
 
             // 플레이어 가져와서 플레이어 능력치 보여줘야 함
             Console.WriteLine("Lv. " + Player.Instance.Lv);
+            Console.WriteLine("Exp: " + Player.Instance.CurExp + " / " + Player.Instance.MaxExp);
             Console.WriteLine("이름: " + Player.Instance.Name);
             Console.WriteLine("공격력: " + (Player.Instance.Atk + Player.Instance.PlusAtk) + addAtk);
             Console.WriteLine("방어력: " + (Player.Instance.Def + Player.Instance.PlusDef) + addDef);

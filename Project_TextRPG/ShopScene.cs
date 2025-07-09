@@ -153,7 +153,7 @@ namespace Project_TextRPG
             items[6].Type = Item.ItemType.Armor;
             items[6].Stat = Item.ItemStat.Hp;
             items[6].StatPoint = 10000;
-            items[6].Explanation = "창조주가 사용했다는 전설의 창입니다.";
+            items[6].Explanation = "창조주가 사용했다는 전설의 벨트입니다.";
             items[6].Gold = 10000;
         }
 
@@ -186,7 +186,7 @@ namespace Project_TextRPG
             switch (item.Stat)
             {
                 case Item.ItemStat.Hp:
-                    itemStat = "체력　";
+                    itemStat = "체력";
                     break;
                 case Item.ItemStat.Atk:
                     itemStat = "공격력";

@@ -28,6 +28,10 @@ namespace Project_TextRPG
             //CurHP = TotalMaxHp;
             CurHP = 40;
 
+            // 경험치 통 = lv * 5f
+            MaxExp = (Lv * 5);
+            CurExp = 0;
+
             inventory = new List<Item>();
             equipments = new Dictionary<Item.ItemType, Item>();
 
@@ -62,17 +66,19 @@ namespace Project_TextRPG
         // 플레이어 능력치
         public int Lv { get; set; }
         public string Name { get; set; }
-        public int Atk { get; set; }
-        public int Def { get; set; }
+        public float Atk { get; set; }
+        public float Def { get; set; }
         public int MaxHP { get; set; }
         public int CurHP { get; set; }
         public int Gold { get; set; }
+        public int MaxExp { get; set; }
+        public int CurExp { get; set; }
         // 장비 장착시 추가되는 능령치
-        public int PlusAtk { get; set; }
-        public int PlusDef { get; set; }
+        public float PlusAtk { get; set; }
+        public float PlusDef { get; set; }
         public int PlusHP { get; set; }
-        public int TotalAtk { get; set; }
-        public int TotalDef { get; set; }
+        public float TotalAtk { get; set; }
+        public float TotalDef { get; set; }
         public int TotalMaxHp { get; set; }
         
         public void SetAbilityByEquipment()
@@ -106,5 +112,15 @@ namespace Project_TextRPG
             // 플레이어의 현재 체력은 최대 체력에 의해 결정되게끔
             CurHP = CurHP > TotalMaxHp ? TotalMaxHp : CurHP;
         }
+        public void SetLvUp()
+        {
+            // 랩업하고 능령치 재세팅
+            Lv++;
+            MaxExp = (Lv * 5);
+            Atk += 0.5f;
+            Def += 1.0f;
+            SetAbilityByEquipment();
+        }
     }
+    
 }

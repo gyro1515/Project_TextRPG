@@ -97,6 +97,9 @@ namespace Project_TextRPG
         }
         void ShowClear()
         {
+            int beforeLv = Player.Instance.Lv;
+            float beforeAtk = Player.Instance.Atk;
+            float beforeDef = Player.Instance.Def;
             int beforeGold = Player.Instance.Gold;
             int beforeHp = Player.Instance.CurHP;
             if (selectedDungeon != null) selectedDungeon.Clear();
@@ -108,6 +111,13 @@ namespace Project_TextRPG
             if(selectedDungeon != null) Console.WriteLine($"{selectedDungeon.Name}을 클리어 하였습니다.");
             Console.WriteLine();
             Console.WriteLine("[탐험 결과]");
+            if (beforeLv != Player.Instance.Lv) // 레벨업을 했다면
+            {
+                Console.WriteLine("레벨 업!!");
+                Console.WriteLine($"Lv {beforeLv} -> {Player.Instance.Lv}");
+                Console.WriteLine($"공격력 {beforeAtk} -> {Player.Instance.Atk}");
+                Console.WriteLine($"방어력 {beforeDef} -> {Player.Instance.Def}");
+            }
             Console.WriteLine($"체력 {beforeHp} -> {Player.Instance.CurHP}");
             Console.WriteLine($"Gold {beforeGold} G -> {Player.Instance.Gold} G");
             Console.WriteLine();
@@ -297,14 +307,17 @@ namespace Project_TextRPG
             dungeons[0].Name = "쉬운 던전";
             dungeons[0].Def = 5;
             dungeons[0].Gold = 1000;
+            dungeons[0].Exp = 5;
             dungeons.Add(new Dungeon());
             dungeons[1].Name = "일반 던전";
             dungeons[1].Def = 11;
             dungeons[1].Gold = 1700;
+            dungeons[1].Exp = 7;
             dungeons.Add(new Dungeon());
             dungeons[2].Name = "어려운 던전";
             dungeons[2].Def = 17;
             dungeons[2].Gold = 2500;
+            dungeons[2].Exp = 10;
 
             // 난이도 선택지
             for (int i = 0; i < dungeons.Count; i++)
