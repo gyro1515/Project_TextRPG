@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Project_TextRPG.SceneManager;
 
 namespace Project_TextRPG
 {
@@ -17,10 +18,12 @@ namespace Project_TextRPG
 
         // 아이템은 상점에 있어야?
         List<Item> items;
-        public override void ShowScene(int selNum)
+        public override void ShowScene()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("상점");
             Console.WriteLine("필요한 아이템을 구매 수 있습니다.");
+            Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine("[보유 골드]");
             // 플레이어 골드 가져오기, 123대신 넣기
@@ -33,7 +36,7 @@ namespace Project_TextRPG
             {
                 // 마지막 두 줄 띄우기
                 if (i == optionsLen - 2) Console.WriteLine();
-                if (i == selNum) Console.Write("▶");
+                if (i == optionNum) Console.Write("▶");
                 else Console.Write("　");
 
                 Console.WriteLine(" " + options[i]);
@@ -42,9 +45,58 @@ namespace Project_TextRPG
             Console.WriteLine();
             Console.WriteLine("이동: 방향키, 구매:z, 돌아가기: x");
 
-            Player.Instance.ShopScene();
+            SceneControl();
         }
+        public override void SceneControl()
+        {
+            switch (ControlManager.Instance.GetKey())
+            {
+                case InputKey.Up:
+                    if (optionNum != 0) optionNum--;
+                    break;
+                case InputKey.Down:
+                    if (optionNum != OptionsLen - 1) optionNum++;
+                    break;
+                case InputKey.Z:
+                    // 구매하기 기능 추가
+                    for (int i = 0; i < OptionsLen; i++)
+                    {
+                        if (i == optionNum) // 해당 선택지를 고른 경우
+                        {
+                            // 선택지가 나가기일 시
+                            if (optionNum == OptionsLen - 1)
+                            {
+                                SceneManager.Instance.SetSceneState = SceneManager.SceneState.StartScene;
+                            }
+                            else if (optionNum == OptionsLen - 2) // 아이템 판매 선택
+                            {
+                                SceneManager.Instance.SetSceneState = SceneManager.SceneState.SellScene;
 
+                                /*if (scenesDTY[SceneState.SellScene] is SellScene sellS)
+                                {
+                                    sellS.SetSellList();
+                                }*/
+                            }
+                            else // 아이템 선택시
+                            {
+                                // 아이템 구매
+                                BuyItem(optionNum);
+                            }
+                        }
+                    }
+                    break;
+                case InputKey.X:
+                    SceneManager.Instance.SetSceneState = SceneManager.SceneState.StartScene;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public override void SetupScene()
+        {
+            base.SetupScene();
+            SetItemString();
+        }
         void CreateItem()
         {
             items.Add(new Item());

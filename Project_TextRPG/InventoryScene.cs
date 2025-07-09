@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Project_TextRPG.SceneManager;
 
 namespace Project_TextRPG
 {
@@ -14,9 +15,11 @@ namespace Project_TextRPG
             // 인벤토리 씬에 들어올 때만 설정하기
             //SetInventoryString(); 
         }
-        public override void ShowScene(int selNum)
+        public override void ShowScene()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("인벤토리");
+            Console.ResetColor();
             Console.WriteLine("보유 중인 아이템을 장착할 수 있습니다.");
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
@@ -27,7 +30,7 @@ namespace Project_TextRPG
             {
                 // 마지막 한 줄 띄우기
                 if (i == optionsLen - 1) Console.WriteLine();
-                if (i == selNum) Console.Write("▶");
+                if (i == optionNum) Console.Write("▶");
                 else Console.Write("　");
 
                 Console.WriteLine(" " + options[i]);
@@ -36,7 +39,61 @@ namespace Project_TextRPG
             Console.WriteLine();
             Console.WriteLine("이동: 방향키, 장착:z, 돌아가기: x");
 
-            Player.Instance.InventoryScene();
+            SceneControl();
+        }
+        public override void SceneControl()
+        {
+            switch (ControlManager.Instance.GetKey())
+            {
+                case InputKey.Up:
+                    if (optionNum != 0) optionNum--;
+                    break;
+                case InputKey.Down:
+                    if (optionNum != OptionsLen - 1) optionNum++;
+                    break;
+                case InputKey.Z:
+                    // 장착하기 기능 추가, i는 플레이어가 보유한 최대 아이템 개수까지
+                    for (int i = 0; i < Player.Instance.inventory.Count + 1; i++) // 인벤토리 아이템 개수 + 나가기 버튼까지
+                    {
+                        if (i == optionNum) // 해당 선택지를 고른 경우
+                        {
+                            // 선택지가 나가기일 시
+                            if (optionNum == OptionsLen - 1)
+                            {
+                                SceneManager.Instance.SetSceneState = SceneManager.SceneState.StartScene;
+                            }
+                            else // 아이템 선택시
+                            {
+                                // 아이템 장착
+                                // 명시적 형변환
+                                //((InventoryScene)scenesDTY[SceneState.InventoryScene]).EquippedEquipment(selNum);
+                                // 형변환 1
+                                /*if (scenesDTY[SceneState.InventoryScene] is InventoryScene invenScn)
+                                {
+                                    invenScn.EquippedEquipment(optionNum);
+                                }*/
+                                // 형변환 2
+                                /*InventoryScene? invenS = scenesDTY[SceneState.InventoryScene] as InventoryScene;
+                                if (invenS != null)
+                                {
+                                    invenS.EquippedEquipment(selNum);
+                                }*/
+                                EquippedEquipment(optionNum);
+                            }
+                        }
+                    }
+                    break;
+                case InputKey.X:
+                    SceneManager.Instance.SetSceneState = SceneManager.SceneState.StartScene;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public override void SetupScene()
+        {
+            base.SetupScene(); // 부모것도 호출
+            SetInventoryString();
         }
         public void SetInventoryString()
         {
@@ -113,5 +170,6 @@ namespace Project_TextRPG
             // 플레이어 장비 능력치도 재설정
             tP.SetAbilityByEquipment();
         }
+
     }
 }

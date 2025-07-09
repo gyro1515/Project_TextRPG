@@ -10,7 +10,10 @@ namespace Project_TextRPG
     internal class ScreenManager
     {
         private static ScreenManager? instance;
-        private ScreenManager() { }
+        private ScreenManager() 
+        {
+            
+        }
 
         public static ScreenManager Instance
         {
@@ -22,7 +25,16 @@ namespace Project_TextRPG
             }
         }
 
-        private const uint GENERIC_READ = 0x80000000;
+        
+
+
+
+
+
+
+
+        // 더블 버퍼링 용도, 구현 실패
+        /*private const uint GENERIC_READ = 0x80000000;
         private const uint GENERIC_WRITE = 0x40000000;
         private const uint CONSOLE_TEXTMODE_BUFFER = 1;
 
@@ -114,6 +126,6 @@ namespace Project_TextRPG
         {
             CloseHandle(buffers[0]);
             CloseHandle(buffers[1]);
-        }
+        }*/
     }
 }

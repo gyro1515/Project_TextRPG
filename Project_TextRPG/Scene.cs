@@ -15,17 +15,27 @@ namespace Project_TextRPG
         protected int statPadding = 48;
         // 일시 정지 시간
         protected int sleepTime = 800;
+        // 선택용 숫자
+        protected int optionNum = 0;
         public int OptionsLen
             { get { return optionsLen; } }
         public Scene()
         {
             options = new List<string>();
         }
-        public int SelNum{ get; set; }
 
-        public virtual void ShowScene(int selNum)
+        public virtual void ShowScene()
         {
             Console.WriteLine("Empty");
+            SceneControl();
+        }
+        public virtual void SceneControl()
+        {
+            Console.WriteLine("No Ctl");
+        }
+        public virtual void SetupScene()
+        {
+            optionNum = 0;
         }
 
     }

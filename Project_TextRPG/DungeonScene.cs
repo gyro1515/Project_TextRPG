@@ -12,9 +12,10 @@ namespace Project_TextRPG
         {
            
         }
-        public override void ShowScene(int selNum)
+        public override void ShowScene()
         {
-            
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ResetColor();
         }
     }
 }
