@@ -59,7 +59,12 @@ namespace Project_TextRPG
                 // 인스턴스 할당 x
                 // 세이브 데이터가 있다면 인스턴에에 로드 데이터 할당하고 리턴
                 Player? player = SaveManager.Load();
-                if (player != null) return instance = player;
+                if (player != null)
+                {
+                    instance = player;
+                    instance.SetLoad();
+                    return instance = player;
+                }
 
                 // 인스턴스 할당 x, 세이브 데이터x
                 // 인스턴스에 새로운 객체 할당하고 리턴
@@ -137,6 +142,24 @@ namespace Project_TextRPG
             MaxExp = (Lv * 5);
             Atk += 0.5f;
             Def += 1.0f;
+            SetAbilityByEquipment();
+        }
+
+        void SetLoad()
+        {
+            // 인벤토리에서 작창 표시된 거 장착하기.
+            // 현재는 로드된 Equipments와 Inventory의 객체가 서로 다름,
+            // 기존에는 같은 객채라서 객체 주소값 다시 넘겨 줘야함
+            Equipments.Clear();
+            foreach (var item in Inventory)
+            {
+                // 장착되어 있다면
+                if(item.IsEquip)
+                {
+                    Equipments.Add(item.Type, item);
+                }
+            }
+            // 안해도 되지만, 능력치도 재설정
             SetAbilityByEquipment();
         }
     }

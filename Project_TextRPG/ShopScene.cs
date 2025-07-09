@@ -14,6 +14,8 @@ namespace Project_TextRPG
             items = new List<Item>();
             CreateItem();
             AddOptions();
+            // 플레이어 아이템과 비교해여, 구매한 템 체크
+            LoadPlayerItem();
         }
 
         // 아이템은 상점에 있어야?
@@ -211,15 +213,15 @@ namespace Project_TextRPG
         public void BuyItem(int idx)
         {
             // 나가기는 신경 안써도 됨
-            // 구매 가능하다면
-            if (Player.Instance.Gold - items[idx].Gold >= 0)
+            if (items[idx].IsBuy) // 이미 구매했다면
             {
-                if (items[idx].IsBuy) // 이미 구매했다면
-                {
-                    Console.WriteLine("이미 구매한 아이템입니다.");
-                    Thread.Sleep(sleepTime);
-                }
-                else
+                Console.WriteLine("이미 구매한 아이템입니다.");
+                Thread.Sleep(sleepTime);
+            }
+            else
+            {
+                // 구매 가능하다면
+                if (Player.Instance.Gold - items[idx].Gold >= 0)
                 {
                     Console.WriteLine(items[idx].Name + " 구매 완료");
                     Thread.Sleep(sleepTime);
@@ -232,11 +234,28 @@ namespace Project_TextRPG
                     // 출력 고치기
                     SetItemString();
                 }
+                else
+                {
+                    Console.WriteLine("Gold 가 부족합니다.");
+                    Thread.Sleep(sleepTime);
+                }
             }
-            else
+        }
+        void LoadPlayerItem()
+        {
+            foreach(var item in Player.Instance.Inventory)
             {
-                Console.WriteLine("금액이 부족합니다.");
-                Thread.Sleep(sleepTime);
+                for (int i = 0; i < optionsLen - 2; i++)
+                {
+                    // 플레이어가 해당 아이템을 가지고 있다면
+                    if (item.Name == items[i].Name)
+                    {
+                        // 기존 아이템 삭제 후
+                        items[i].Dispose();
+                        // 플레이어 아이템으로 세팅
+                        items[i] = item;
+                    }
+                }
             }
         }
         

@@ -245,7 +245,7 @@ namespace Project_TextRPG
                         case 1: // 수동
                             Console.WriteLine("수동 클리어를 선택하셨습니다.");
                             Thread.Sleep(sleepTime);
-                            Console.WriteLine("구현 중인 기능입니다.");
+                            Console.WriteLine("현재 레벨에서는 이 기능을 사용할 수 없습니다.");
                             Thread.Sleep(sleepTime);
                             break;
                         case 2: // 나가기

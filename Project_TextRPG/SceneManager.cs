@@ -40,7 +40,7 @@ namespace Project_TextRPG
         }
         public enum SceneState
         {
-            StartScene, StatScene, InventoryScene, ShopScene, SellScene, Dungeon, Rest
+            StartScene, StatScene, InventoryScene, ShopScene, SellScene, Dungeon, Rest,
         }
 
         private SceneState sceneState = SceneState.StartScene;
