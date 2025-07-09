@@ -64,20 +64,6 @@ namespace Project_TextRPG
                             }
                             else // 아이템 선택시
                             {
-                                // 아이템 장착
-                                // 명시적 형변환
-                                //((InventoryScene)scenesDTY[SceneState.InventoryScene]).EquippedEquipment(selNum);
-                                // 형변환 1
-                                /*if (scenesDTY[SceneState.InventoryScene] is InventoryScene invenScn)
-                                {
-                                    invenScn.EquippedEquipment(optionNum);
-                                }*/
-                                // 형변환 2
-                                /*InventoryScene? invenS = scenesDTY[SceneState.InventoryScene] as InventoryScene;
-                                if (invenS != null)
-                                {
-                                    invenS.EquippedEquipment(selNum);
-                                }*/
                                 EquippedEquipment(optionNum);
                             }
                         }
@@ -94,6 +80,7 @@ namespace Project_TextRPG
         {
             base.SetupScene(); // 부모것도 호출
             SetInventoryString();
+            optionNum = 0;
         }
         public void SetInventoryString()
         {

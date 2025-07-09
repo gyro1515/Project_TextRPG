@@ -96,6 +96,8 @@ namespace Project_TextRPG
         {
             base.SetupScene();
             SetItemString();
+            optionNum = 0;
+
         }
         void CreateItem()
         {

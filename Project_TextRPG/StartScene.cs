@@ -82,8 +82,7 @@ namespace Project_TextRPG
                             SceneManager.Instance.SetSceneState = SceneManager.SceneState.ShopScene;
                             break;
                         case 3: // 던전
-                            Console.WriteLine("던전 입장!!! 미구현");
-                            Thread.Sleep(sleepTime);
+                            SceneManager.Instance.SetSceneState = SceneManager.SceneState.Dungeon;
                             break;
                         case 4: // 휴식하기
                             SceneManager.Instance.SetSceneState = SceneManager.SceneState.Rest;

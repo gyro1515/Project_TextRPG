@@ -80,6 +80,8 @@ namespace Project_TextRPG
         {
             base.SetupScene();
             SetSellList();
+            optionNum = 0;
+
         }
         public void SetSellList()
         {

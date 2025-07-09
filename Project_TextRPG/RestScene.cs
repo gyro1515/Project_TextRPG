@@ -66,6 +66,10 @@ namespace Project_TextRPG
                     break;
             }
         }
+        public override void SetupScene()
+        {
+            optionNum = 0;
+        }
         public void RestAndRecover()
         {
             Player p = Player.Instance;
