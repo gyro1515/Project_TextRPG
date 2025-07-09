@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace Project_TextRPG
             options.Add("3. 상점");
             options.Add("4. 던전입장");
             options.Add("5. 휴식하기");
+            options.Add("6. 저장하기");
             optionsLen = options.Count;
         }
         public override void ShowScene()
@@ -86,6 +88,12 @@ namespace Project_TextRPG
                             break;
                         case 4: // 휴식하기
                             SceneManager.Instance.SetSceneState = SceneManager.SceneState.Rest;
+                            break;
+                        case 5: // 저장하기
+                            SaveManager.Save(Player.Instance);
+                            break;
+                        case 6: // 불러오기
+                            
                             break;
                         default:
                             break;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -10,6 +11,7 @@ namespace Project_TextRPG
     internal class Player
     {
         private static Player? instance;
+        [JsonConstructor]
         private Player()
         {
             Lv = 1;
@@ -32,8 +34,10 @@ namespace Project_TextRPG
             MaxExp = (Lv * 5);
             CurExp = 0;
 
-            inventory = new List<Item>();
-            equipments = new Dictionary<Item.ItemType, Item>();
+            /*inventory = new List<Item>();
+            equipments = new Dictionary<Item.ItemType, Item>();*/
+            Inventory = new List<Item>();
+            Equipments = new Dictionary<Item.ItemType, Item>();
 
             // Dictionary로 구현해보기 -> 씬 매니저로 이동
             /*scenesDTY = new Dictionary<SceneState, Scene>();
@@ -49,17 +53,30 @@ namespace Project_TextRPG
         {
             get
             {
-                if (instance == null) instance = new Player();
-                return instance;
+                // 인스턴스가 할당되어 있다면 인스턴스 리턴
+                if (instance != null) return instance;
+
+                // 인스턴스 할당 x
+                // 세이브 데이터가 있다면 인스턴에에 로드 데이터 할당하고 리턴
+                Player? player = SaveManager.Load();
+                if (player != null) return instance = player;
+
+                // 인스턴스 할당 x, 세이브 데이터x
+                // 인스턴스에 새로운 객체 할당하고 리턴
+                return instance = new Player();
+
             }
         }
 
-        //private List<Scene> scenes;
-        
+        // json 직렬화를 위한
+        public List<Item> Inventory { get; set; }
+        public Dictionary<Item.ItemType, Item> Equipments { get; set; }
+
         // 인벤토리
-        public List<Item> inventory;
+        /*public List<Item> inventory;
         // 장비창, 한 종류의 아이템만 장착하기
-        public Dictionary<Item.ItemType, Item> equipments;
+        public Dictionary<Item.ItemType, Item> equipments;*/
+
         // 출력 후 대기 시간 -> 현재 사용 x
         //int sleepTime = 800;
 
@@ -88,7 +105,8 @@ namespace Project_TextRPG
             PlusAtk = 0;
             PlusDef = 0;
 
-            foreach (var item in equipments)
+            //foreach (var item in equipments)
+            foreach (var item in Equipments)
             {
                 // 착용 능령치에 따라 능력치 증가
                 switch (item.Value.Stat)

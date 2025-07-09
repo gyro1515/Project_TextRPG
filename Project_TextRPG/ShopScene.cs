@@ -226,7 +226,7 @@ namespace Project_TextRPG
                     // 금액 차감
                     Player.Instance.Gold -= items[idx].Gold;
                     // 플레이어 인벤토리에 넣기
-                    Player.Instance.inventory.Add(items[idx]);
+                    Player.Instance.Inventory.Add(items[idx]);
                     // 구매 완료로 표기
                     items[idx].IsBuy = true;
                     // 출력 고치기

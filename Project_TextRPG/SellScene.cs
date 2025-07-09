@@ -87,7 +87,7 @@ namespace Project_TextRPG
         {
             options.Clear();
             // 변수 명 간소화
-            List<Item> inven = Player.Instance.inventory;
+            List<Item> inven = Player.Instance.Inventory;
 
             for (int i = 0; i < inven.Count; i++)
             {
@@ -119,7 +119,7 @@ namespace Project_TextRPG
         public void SellItem(int idx)
         {
             // 나가기는 신경 안써도 됨
-            List<Item> inven = Player.Instance.inventory;
+            List<Item> inven = Player.Instance.Inventory;
 
             // 장착 중이라면 판매 불가
             if (inven[idx].IsEquip)

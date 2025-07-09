@@ -53,7 +53,7 @@ namespace Project_TextRPG
                     break;
                 case InputKey.Z:
                     // 장착하기 기능 추가, i는 플레이어가 보유한 최대 아이템 개수까지
-                    for (int i = 0; i < Player.Instance.inventory.Count + 1; i++) // 인벤토리 아이템 개수 + 나가기 버튼까지
+                    for (int i = 0; i < Player.Instance.Inventory.Count + 1; i++) // 인벤토리 아이템 개수 + 나가기 버튼까지
                     {
                         if (i == optionNum) // 해당 선택지를 고른 경우
                         {
@@ -87,14 +87,14 @@ namespace Project_TextRPG
             options.Clear();
             // 플레이어 변수명 짧게 변경
             Player tP = Player.Instance;
-            for (int i = 0; i < tP.inventory.Count; i++)
+            for (int i = 0; i < tP.Inventory.Count; i++)
             {
                 string itemStat = "";
                 string equipString = "   ";
                 // 공간 정렬?을 위한 패딩, 딱 맞게 출력되도록
-                int npad = padding - ControlManager.Instance.GetDisplayWidth(tP.inventory[i].Name);
-                int epad = exPadding - ControlManager.Instance.GetDisplayWidth(tP.inventory[i].Explanation);
-                switch (tP.inventory[i].Stat)
+                int npad = padding - ControlManager.Instance.GetDisplayWidth(tP.Inventory[i].Name);
+                int epad = exPadding - ControlManager.Instance.GetDisplayWidth(tP.Inventory[i].Explanation);
+                switch (tP.Inventory[i].Stat)
                 {
                     case Item.ItemStat.Hp:
                         itemStat = "체력";
@@ -108,10 +108,10 @@ namespace Project_TextRPG
                     default:
                         break;
                 }
-                if (tP.inventory[i].IsEquip) equipString = "[E]";
+                if (tP.Inventory[i].IsEquip) equipString = "[E]";
 
                 itemStat += " +";
-                options.Add("- " + equipString + tP.inventory[i].Name + new string(' ', npad) + "|  " + itemStat + tP.inventory[i].StatPoint + "\t|  " + tP.inventory[i].Explanation + new string(' ', epad) + "|");
+                options.Add("- " + equipString + tP.Inventory[i].Name + new string(' ', npad) + "|  " + itemStat + tP.Inventory[i].StatPoint + "\t|  " + tP.Inventory[i].Explanation + new string(' ', epad) + "|");
             }
             options.Add("0. 나가기");
             optionsLen = options.Count;
@@ -120,34 +120,34 @@ namespace Project_TextRPG
         public void EquippedEquipment(int idx)
         {
             Player tP = Player.Instance;
-            tP.inventory[idx].IsEquip = true;
+            tP.Inventory[idx].IsEquip = true;
             // 해당 부위를 이미 장착하고 있다면
-            if (tP.equipments.ContainsKey(tP.inventory[idx].Type))
+            if (tP.Equipments.ContainsKey(tP.Inventory[idx].Type))
             {
                 // 장착한 부위를 다시 클릭했다면, 장착 해제
-                if (tP.equipments[tP.inventory[idx].Type] == tP.inventory[idx])
+                if (tP.Equipments[tP.Inventory[idx].Type] == tP.Inventory[idx])
                 {
-                    tP.equipments[tP.inventory[idx].Type].IsEquip = false;
-                    Console.WriteLine(tP.equipments[tP.inventory[idx].Type].Name + " 장착 해제");
+                    tP.Equipments[tP.Inventory[idx].Type].IsEquip = false;
+                    Console.WriteLine(tP.Equipments[tP.Inventory[idx].Type].Name + " 장착 해제");
                     Thread.Sleep(sleepTime);
                     // 해당 부위 삭제
-                    tP.equipments.Remove(tP.inventory[idx].Type);
+                    tP.Equipments.Remove(tP.Inventory[idx].Type);
                 }
                 else
                 {
                     // 교체
-                    Console.WriteLine(tP.equipments[tP.inventory[idx].Type].Name + "을 " + tP.inventory[idx].Name + "으로 교체");
+                    Console.WriteLine(tP.Equipments[tP.Inventory[idx].Type].Name + "을 " + tP.Inventory[idx].Name + "으로 교체");
                     Thread.Sleep(sleepTime);
-                    tP.equipments[tP.inventory[idx].Type].IsEquip = false;
-                    tP.equipments[tP.inventory[idx].Type] = tP.inventory[idx];
+                    tP.Equipments[tP.Inventory[idx].Type].IsEquip = false;
+                    tP.Equipments[tP.Inventory[idx].Type] = tP.Inventory[idx];
                 }
             }
             else // 해당 부위가 비었다면
             {
                 // 착용
-                Console.WriteLine(tP.inventory[idx].Name + " 장착");
+                Console.WriteLine(tP.Inventory[idx].Name + " 장착");
                 Thread.Sleep(sleepTime);
-                tP.equipments.Add(tP.inventory[idx].Type, tP.inventory[idx]);
+                tP.Equipments.Add(tP.Inventory[idx].Type, tP.Inventory[idx]);
             }
             
 

@@ -30,7 +30,10 @@ namespace Project_TextRPG
         {
             get
             {
-                if (instance == null) instance = new SceneManager();
+                if (instance == null)
+                {
+                    instance = new SceneManager();
+                }
 
                 return instance;
             }
