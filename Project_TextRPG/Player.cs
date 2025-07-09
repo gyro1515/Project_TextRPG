@@ -19,7 +19,7 @@ namespace Project_TextRPG
             MaxHP = 100;
             //CurHP = MaxHP;
             CurHP = 40;
-            Gold = 5000;
+            Gold = 15000;
             PlusAtk = 0;
             PlusDef = 0;
             PlusHP = 0;
@@ -93,6 +93,8 @@ namespace Project_TextRPG
                         break;
                 }
             }
+            // 플레이어의 현재 체력은 최대 체력에 의해 결정되게끔
+            CurHP = CurHP > MaxHP + PlusHP ? MaxHP + PlusHP : CurHP;
         }
     }
 }

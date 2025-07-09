@@ -47,7 +47,7 @@ namespace Project_TextRPG
 
             SceneControl();
         }
-        public override void SceneControl()
+        protected override void SceneControl()
         {
             switch (ControlManager.Instance.GetKey())
             {
@@ -146,6 +146,13 @@ namespace Project_TextRPG
             items[5].StatPoint = 7;
             items[5].Explanation = "스파르타의 전사들이 사용했다는 전설의 창입니다.";
             items[5].Gold = 2000;
+            items.Add(new Item());
+            items[6].Name = "창조주의 벨트";
+            items[6].Type = Item.ItemType.Armor;
+            items[6].Stat = Item.ItemStat.Hp;
+            items[6].StatPoint = 10000;
+            items[6].Explanation = "창조주가 사용했다는 전설의 창입니다.";
+            items[6].Gold = 10000;
         }
 
         void AddOptions()

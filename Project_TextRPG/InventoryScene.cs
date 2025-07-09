@@ -41,7 +41,7 @@ namespace Project_TextRPG
 
             SceneControl();
         }
-        public override void SceneControl()
+        protected override void SceneControl()
         {
             switch (ControlManager.Instance.GetKey())
             {
@@ -162,6 +162,7 @@ namespace Project_TextRPG
                 Thread.Sleep(sleepTime);
                 tP.equipments.Add(tP.inventory[idx].Type, tP.inventory[idx]);
             }
+            
 
             // 비효울 적이지만... 
             // 시간이 남으면 마지막에 출력때만 설정하게 하기

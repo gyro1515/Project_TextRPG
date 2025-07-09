@@ -27,9 +27,9 @@ namespace Project_TextRPG
         public virtual void ShowScene()
         {
             Console.WriteLine("Empty");
-            SceneControl();
+            //SceneControl();
         }
-        public virtual void SceneControl()
+        protected virtual void SceneControl()
         {
             Console.WriteLine("No Ctl");
         }

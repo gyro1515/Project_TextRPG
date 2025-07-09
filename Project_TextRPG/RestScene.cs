@@ -35,7 +35,7 @@ namespace Project_TextRPG
 
             SceneControl();
         }
-        public override void SceneControl()
+        protected override void SceneControl()
         {
             switch (ControlManager.Instance.GetKey())
             {
@@ -71,7 +71,7 @@ namespace Project_TextRPG
             Player p = Player.Instance;
             if (p.Gold - gold >= 0) // 구매가능
             {
-                p.CurHP = Player.Instance.MaxHP;
+                p.CurHP = Player.Instance.MaxHP + Player.Instance.PlusHP;
                 p.Gold -= gold;
                 Console.WriteLine("휴식을 완료했습니다.");
                 Thread.Sleep(sleepTime);

@@ -55,7 +55,7 @@ namespace Project_TextRPG
 
             SceneControl();
         }
-        public override void SceneControl()
+        protected override void SceneControl()
         {
             switch (ControlManager.Instance.GetKey())
             {
@@ -70,7 +70,6 @@ namespace Project_TextRPG
                     {
                         case 0: // 스텟 보기
                             SceneManager.Instance.SetSceneState = SceneManager.SceneState.StatScene;
-                            //SceneManager.Instance.GetCurScene.SetupScene();
                             break;
                         case 1: // 인벤토리
                             SceneManager.Instance.SetSceneState = SceneManager.SceneState.InventoryScene;
@@ -97,9 +96,9 @@ namespace Project_TextRPG
                     break;
             }
         }
-        public override void SetupScene()
+        /*public override void SetupScene()
         {
             base.SetupScene(); // 부모것도 호출
-        }
+        }*/
     }
 }

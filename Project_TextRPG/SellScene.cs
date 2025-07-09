@@ -41,7 +41,7 @@ namespace Project_TextRPG
 
             SceneControl();
         }
-        public override void SceneControl()
+        protected override void SceneControl()
         {
             switch (ControlManager.Instance.GetKey())
             {

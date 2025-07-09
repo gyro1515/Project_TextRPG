@@ -22,10 +22,8 @@ namespace Project_TextRPG
             Console.ResetColor();
             Console.WriteLine();
 
+            // if와 switch, 삼항 연산자 중 어떤 걸?
             string addAtk;
-            string addDef = "";
-            string addHp = "";
-            // if와 switch 중 어떤 걸?
             switch (Player.Instance.PlusAtk)
             {
                 case 0:
@@ -35,15 +33,16 @@ namespace Project_TextRPG
                     addAtk = " (+" + Player.Instance.PlusAtk + ")";
                     break;
             }
+            string addDef = "";
+            if (Player.Instance.PlusDef > 0) addDef = " (+" + Player.Instance.PlusDef + ")";
+            string addHp = Player.Instance.PlusHP > 0 ? addHp = " (+" + Player.Instance.PlusHP + ")" : "";
+
 
             // 플레이어 가져와서 플레이어 능력치 보여줘야 함
             Console.WriteLine("Lv. " + Player.Instance.Lv);
             Console.WriteLine("이름: " + Player.Instance.Name);
-            //if(Player.Instance.PlusAtk > 0) addAtk = " (+" + Player.Instance.PlusAtk + ")";
             Console.WriteLine("공격력: " + (Player.Instance.Atk + Player.Instance.PlusAtk) + addAtk);
-            if (Player.Instance.PlusDef > 0) addDef = " (+" + Player.Instance.PlusDef + ")";
             Console.WriteLine("방어력: " + (Player.Instance.Def + Player.Instance.PlusDef) + addDef);
-            if (Player.Instance.PlusHP > 0) addHp = " (+" + Player.Instance.PlusHP + ")";
             Console.WriteLine("체력: " + Player.Instance.CurHP + " / " + (Player.Instance.MaxHP + Player.Instance.PlusHP) + addHp);
             Console.WriteLine("Gold: " + Player.Instance.Gold + " G");
             Console.WriteLine();
@@ -60,7 +59,7 @@ namespace Project_TextRPG
 
             SceneControl();
         }
-        public override void SceneControl()
+        protected override void SceneControl()
         {
             switch (ControlManager.Instance.GetKey())
             {
@@ -72,9 +71,9 @@ namespace Project_TextRPG
                     break;
             }
         }
-        public override void SetupScene()
+        /*public override void SetupScene()
         {
             base.SetupScene(); // 부모것도 호출
-        }
+        }*/
     }
 }
