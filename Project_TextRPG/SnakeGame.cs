@@ -97,7 +97,7 @@ namespace Project_TextRPG
                     GameStart();
                     break;
                 case GameState.GameOver:
-                    GameOver();
+                    GameStartLastFrame();
                     Thread.Sleep(2000);// 일정 시간 후 자동으로 건너뛰기
                     break;
                 default:
@@ -122,8 +122,7 @@ namespace Project_TextRPG
                     }
                     break;
                 case GameStartState.GO:
-                    //sb.Append($"현재 점수: {score},  목표 점수: {target}\n");
-                    sb.Append($"현재 점수: {score},  목표 점수: {target}, dir: {dir}, canInput: {canInput}\n");
+                    sb.Append($"현재 점수: {score},  목표 점수: {target}\n");
                     if (tmpTime >= speed)
                     {
                         PlayerMove();
@@ -160,30 +159,10 @@ namespace Project_TextRPG
                 sb.Append("\n");
             }
             Console.Write(sb.ToString());
-            //string sin = Console.ReadLine();
             Thread.Sleep(delta);
-            if (gameState == GameState.GameOver)
-            {
-                GameStartLastFrame();
-                Thread.Sleep(2000);
-            }
-
         }
         void GameStartLastFrame()
         {
-            StringBuilder buffer = new StringBuilder();
-            for (int i = 0; i < 32; i++)
-            {
-                for (int j = 0; j < 110; j++)
-                {
-                    buffer.Append(" ");
-                }
-                buffer.Append("\n");
-            }
-            Console.SetCursorPosition(0, 0);
-
-            Console.Write(sb.ToString());
-            Console.SetCursorPosition(0, 0);
             // 도달 점수 출력하기 위한...
             sb.Clear();
 
@@ -200,8 +179,7 @@ namespace Project_TextRPG
                     }
                     break;
                 case GameStartState.GO:
-                    //sb.Append($"현재 점수: {score},  목표 점수: {target}\n");
-                    sb.Append($"현재 점수: {score},  목표 점수: {target}, dir: {dir}, canInput: {canInput}\n");
+                    sb.Append($"현재 점수: {score},  목표 점수: {target}\n");
                     if (tmpTime >= speed)
                     {
                         PlayerMove();
@@ -237,14 +215,6 @@ namespace Project_TextRPG
                 }
                 sb.Append("\n");
             }
-            Console.Write(sb.ToString());
-        }
-        void GameOver()
-        {
-            // 게임 오버 출력후 넘어가기
-            //Console.SetCursorPosition(0, 0);
-            sb.Clear();
-            sb.Append("Game Over");
             Console.Write(sb.ToString());
             if (score >= target)
             {
@@ -353,9 +323,13 @@ namespace Project_TextRPG
         }
         void MulThreadInput()
         {
-            while (gameOverSte == GameOverState.Playing)
+            while (gameOverSte == GameOverState.Playing) // 게임이 끝나면 이 쓰레드도 끝날 수 있도록
             {
-                if (canInput == false) continue;
+                if (canInput == false)
+                {
+                    Thread.Sleep(1); // CPU 과다 점유 방지
+                    continue;
+                }
                 var key = Console.ReadKey(true).Key;
 
                 switch (key)

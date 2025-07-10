@@ -210,6 +210,7 @@ namespace Project_TextRPG
             }
             itemStat += " +";
             return "- " + item.Name + new string(' ', npad) + "|  " + itemStat + item.StatPoint + "\t|  " + item.Explanation + new string(' ', epad) + "|  " + itemGold;
+           
         }
         public void BuyItem(int idx)
         {
