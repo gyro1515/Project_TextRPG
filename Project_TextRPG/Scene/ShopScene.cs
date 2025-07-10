@@ -250,9 +250,11 @@ namespace Project_TextRPG
                     // 플레이어가 해당 아이템을 가지고 있다면
                     if (item.Name == items[i].Name)
                     {
-                        // 기존 아이템 삭제 후
-                        items[i].Dispose();
+                        //items[i] = null;
                         // 플레이어 아이템으로 세팅
+                        // 기존 items[i]에 있던 객체는
+                        // 더이상 그 무엇도 참조하지 않으므로
+                        // GC에 들어갈것
                         items[i] = item;
                     }
                 }

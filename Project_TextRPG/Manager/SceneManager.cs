@@ -89,10 +89,28 @@ namespace Project_TextRPG
         }
         public void ShowScene()
         {
+            //Console.SetBufferSize(120, 25);
+            Console.CursorVisible = false;
+            // 한번에 출력하여, 깜빡임 줄이기
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 120; j++)
+                {
+                    sb.Append(" ");
+                }
+                sb.Append("\n");
+            }
             while (true)
             {
+                Console.SetCursorPosition(0, 0);
+
                 scenes[sceneState].ShowScene();
-                Console.Clear();
+                // 클리어 대신 덮어써서, 깜빡임 줄이기
+                //Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                
+                Console.Write(sb.ToString());
             }
         }
     }

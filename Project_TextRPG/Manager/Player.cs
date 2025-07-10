@@ -149,14 +149,15 @@ namespace Project_TextRPG
         {
             // 인벤토리에서 작창 표시된 거 장착하기.
             // 현재는 로드된 Equipments와 Inventory의 객체가 서로 다름,
-            // 기존에는 같은 객채라서 객체 주소값 다시 넘겨 줘야함
-            Equipments.Clear();
+            // 기존에는 같은 객체라서 객체 주소값 다시 넘겨 줘야함
+            Equipments.Clear(); // 참조 해제하여 기존 아이템들 가비지 컬렉션으로
+            // 인벤토리 아이템들 체크하여
             foreach (var item in Inventory)
             {
                 // 장착되어 있다면
                 if(item.IsEquip)
                 {
-                    Equipments.Add(item.Type, item);
+                    Equipments.Add(item.Type, item); // 장착
                 }
             }
             // 안해도 되지만, 능력치도 재설정

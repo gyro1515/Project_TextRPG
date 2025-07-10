@@ -113,18 +113,20 @@ namespace Project_TextRPG
             Console.WriteLine("[탐험 결과]");
             if (beforeLv != Player.Instance.Lv) // 레벨업을 했다면
             {
+                Console.WriteLine("-----------------------------");
                 Console.WriteLine("레벨 업!!");
                 Console.WriteLine($"Lv {beforeLv} -> {Player.Instance.Lv}");
                 Console.WriteLine($"공격력 {beforeAtk} -> {Player.Instance.Atk}");
                 Console.WriteLine($"방어력 {beforeDef} -> {Player.Instance.Def}");
+                Console.WriteLine("-----------------------------");
             }
             Console.WriteLine($"체력 {beforeHp} -> {Player.Instance.CurHP}");
             Console.WriteLine($"Gold {beforeGold} G -> {Player.Instance.Gold} G");
             Console.WriteLine();
-            Console.WriteLine("▶ 0. 나가기");
+            //Console.WriteLine("▶ 0. 나가기");
 
             Console.WriteLine();
-            Console.WriteLine("선택:z, 돌아가기: x");
+            Console.WriteLine("계속하려면 아무 키나 눌러주세요.");
         }
         void ShowFail()
         {
@@ -138,9 +140,7 @@ namespace Project_TextRPG
             Console.WriteLine("[탐험 결과]");
             Console.WriteLine($"체력 {beforeHp} -> {Player.Instance.CurHP}");
             Console.WriteLine();
-            Console.WriteLine("▶ 0. 나가기");
-            Console.WriteLine();
-            Console.WriteLine("선택:z, 돌아가기: x");
+            Console.WriteLine("계속하려면 아무 키나 눌러주세요.");
         }
         protected override void SceneControl()
         {
@@ -278,12 +278,9 @@ namespace Project_TextRPG
         {
             switch (ControlManager.Instance.GetKey())
             {
-                case InputKey.Z:
-                case InputKey.X:
-                    dgSt = DugeonState.DifficultySelect;
-                    break;
                 default:
-                    break;
+                    dgSt = DugeonState.DifficultySelect;
+                break;
             }
             // 클리어 출력후, 다시 난이도 선택으로 바꾸기
             //dgSt = DugeonState.DifficultySelect;

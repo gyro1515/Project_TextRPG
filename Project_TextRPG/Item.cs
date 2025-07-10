@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Project_TextRPG
 {
     //internal class Item
-    public class Item : IDisposable
+    public class Item
     {
         public Item()
         {
@@ -37,10 +37,5 @@ namespace Project_TextRPG
         public int Gold { get; set; }
         public bool IsEquip { get; set; }
         public bool IsBuy { get; set; }
-
-        public void Dispose()
-        {
-            //throw new NotImplementedException();
-        }
     }
 }
