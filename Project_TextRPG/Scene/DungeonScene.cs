@@ -289,11 +289,8 @@ namespace Project_TextRPG
         {
             switch (ControlManager.Instance.GetKey())
             {
-                case InputKey.Z:
-                case InputKey.X:
-                    dgSt = DugeonState.DifficultySelect;
-                    break;
                 default:
+                    dgSt = DugeonState.DifficultySelect;
                     break;
             }
         }
