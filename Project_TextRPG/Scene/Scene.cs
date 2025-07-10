@@ -17,11 +17,14 @@ namespace Project_TextRPG
         protected int sleepTime = 800;
         // 선택용 숫자
         protected int optionNum = 0;
+        // 한번에 출력하기 위한 스트링 버퍼
+        protected StringBuilder sb;
         public int OptionsLen
             { get { return optionsLen; } }
         public Scene()
         {
             options = new List<string>();
+            sb = new StringBuilder();
         }
 
         public virtual void ShowScene()

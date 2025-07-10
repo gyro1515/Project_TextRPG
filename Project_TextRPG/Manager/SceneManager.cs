@@ -90,12 +90,13 @@ namespace Project_TextRPG
         public void ShowScene()
         {
             //Console.SetBufferSize(120, 25);
+            Console.SetWindowSize(120, 36);
             Console.CursorVisible = false;
             // 한번에 출력하여, 깜빡임 줄이기
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 32; i++)
             {
-                for (int j = 0; j < 120; j++)
+                for (int j = 0; j < 110; j++)
                 {
                     sb.Append(" ");
                 }

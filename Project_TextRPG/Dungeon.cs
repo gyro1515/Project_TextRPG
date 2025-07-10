@@ -32,9 +32,23 @@ namespace Project_TextRPG
         public int Gold { get; set; }
         // 클리어 경험치
         public int Exp { get; set; }
-        // dgtype 세터
-        //public DungeonType DgType { set { dgtype = value; } }
+        // 스테이크 맵 사이즈
+        public (int y, int x) snakeMapSize { get; set; }
+        // 스네이크 속도
+        public int snakeSpeed { get; set; }
 
+        public SnakeGame? snake { get; private set; }
+
+        public void MakeSnake()
+        {
+            snake = null; // 먼저 null로 설정하여 기존 스네이크 날리기
+            snake = new SnakeGame();
+            snake.SetGame(snakeMapSize.y, snakeMapSize.y, snakeSpeed);
+        }
+        public void EndSnake()
+        {
+            snake = null; // 스네이크만 삭제
+        }
         public void Clear() // 던전 클리어 시
         {
             // 기본 체력 감소량 20 ~ 35 랜덤, 플레이어와 던전 방어력에 따라 추가 감소

@@ -18,9 +18,10 @@ namespace Project_TextRPG
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("상태 보기");
-            Console.WriteLine("캐릭터의 정보가 표시됩니다.");
             Console.ResetColor();
-            Console.WriteLine();
+            sb.Clear();
+            sb.Append("캐릭터의 정보가 표시됩니다.\n");
+            sb.Append("\n");
 
             // if와 switch, 삼항 연산자 중 어떤 걸?
             string addAtk;
@@ -39,25 +40,26 @@ namespace Project_TextRPG
 
 
             // 플레이어 가져와서 플레이어 능력치 보여줘야 함
-            Console.WriteLine("Lv. " + Player.Instance.Lv);
-            Console.WriteLine("Exp: " + Player.Instance.CurExp + " / " + Player.Instance.MaxExp);
-            Console.WriteLine("이름: " + Player.Instance.Name);
-            Console.WriteLine("공격력: " + (Player.Instance.Atk + Player.Instance.PlusAtk) + addAtk);
-            Console.WriteLine("방어력: " + (Player.Instance.Def + Player.Instance.PlusDef) + addDef);
-            Console.WriteLine("체력: " + Player.Instance.CurHP + " / " + (Player.Instance.MaxHP + Player.Instance.PlusHP) + addHp);
-            Console.WriteLine("Gold: " + Player.Instance.Gold + " G");
-            Console.WriteLine();
+            sb.Append("Lv. " + Player.Instance.Lv + "\n");
+            sb.Append("Exp: " + Player.Instance.CurExp + " / " + Player.Instance.MaxExp + "\n");
+            sb.Append("이름: " + Player.Instance.Name + "\n");
+            sb.Append("공격력: " + (Player.Instance.Atk + Player.Instance.PlusAtk) + addAtk + "\n");
+            sb.Append("방어력: " + (Player.Instance.Def + Player.Instance.PlusDef) + addDef + "\n");
+            sb.Append("체력: " + Player.Instance.CurHP + " / " + (Player.Instance.MaxHP + Player.Instance.PlusHP) + addHp + "\n");
+            sb.Append("Gold: " + Player.Instance.Gold + " G" + "\n");
+            sb.Append("\n");
             // 나가기 표시
             for (int i = 0; i < optionsLen; i++)
             {
-                if (i == optionNum) Console.Write("▶");
-                else Console.Write("　");
+                if (i == optionNum) sb.Append("▶");
+                else sb.Append("　");
 
-                Console.WriteLine(" " + options[i]);
+                sb.Append(" " + options[i] + "\n");
             }
-            Console.WriteLine();
-            Console.WriteLine("이동: 방향키, 선택:z, 돌아가기: x");
-
+            sb.Append("\n");
+            sb.Append("이동: 방향키, 선택:z, 돌아가기: x\n");
+            // 한 번에 출력하여 깜빡임 줄이기
+            Console.WriteLine(sb.ToString());
             SceneControl();
         }
         protected override void SceneControl()

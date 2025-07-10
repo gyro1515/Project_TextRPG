@@ -35,6 +35,7 @@ namespace Project_TextRPG
         //ControlSelect 선택지 길이
         int cS_optionsLen = 0;
         
+        
         public override void SetupScene()
         {
             base.SetupScene();
@@ -51,6 +52,9 @@ namespace Project_TextRPG
                 case DugeonState.ControlSelect:
                     ShowCS();
                     break;
+                case DugeonState.ManualPlaying:
+                    ShowMP();
+                    break;
                 case DugeonState.Clear:
                     ShowClear();
                     break;
@@ -60,7 +64,8 @@ namespace Project_TextRPG
                 default:
                     break;
             }
-            SceneControl();
+            
+            //SceneControl(); 개별 씬으로 이동
         }
         void ShowDS()
         {
@@ -77,6 +82,7 @@ namespace Project_TextRPG
             }
             Console.WriteLine();
             Console.WriteLine("이동: 방향키, 선택:z, 돌아가기: x");
+            DgSelectCtl();
         }
         void ShowCS()
         {
@@ -94,6 +100,24 @@ namespace Project_TextRPG
             }
             Console.WriteLine();
             Console.WriteLine("이동: 방향키, 선택:z, 돌아가기: x");
+            CSCtl();
+        }
+        void ShowMP()
+        {
+            if (selectedDungeon == null || selectedDungeon.snake == null) return;
+            
+            selectedDungeon.snake.ShowGame();
+            if (selectedDungeon.snake.gameOverSte == SnakeGame.GameOverState.Fail) // 클리어 실패
+            {
+                dgSt = DugeonState.Fail;
+                selectedDungeon.EndSnake(); // 스네이크 해제, 메모리 누수 심함....
+            }
+            else if (selectedDungeon.snake.gameOverSte == SnakeGame.GameOverState.Clear)// 성공
+            {
+                dgSt = DugeonState.Clear;
+                selectedDungeon.EndSnake(); // 스네이크 해제, 메모리 누수 심함....
+            }
+            
         }
         void ShowClear()
         {
@@ -127,6 +151,7 @@ namespace Project_TextRPG
 
             Console.WriteLine();
             Console.WriteLine("계속하려면 아무 키나 눌러주세요.");
+            ClearCtl();
         }
         void ShowFail()
         {
@@ -141,6 +166,7 @@ namespace Project_TextRPG
             Console.WriteLine($"체력 {beforeHp} -> {Player.Instance.CurHP}");
             Console.WriteLine();
             Console.WriteLine("계속하려면 아무 키나 눌러주세요.");
+            FailCtl();
         }
         protected override void SceneControl()
         {
@@ -245,8 +271,10 @@ namespace Project_TextRPG
                         case 1: // 수동
                             Console.WriteLine("수동 클리어를 선택하셨습니다.");
                             Thread.Sleep(sleepTime);
-                            Console.WriteLine("현재 레벨에서는 이 기능을 사용할 수 없습니다.");
+                            Console.WriteLine("던전에 입장합니다.");
                             Thread.Sleep(sleepTime);
+                            if(selectedDungeon != null) selectedDungeon.MakeSnake();
+                            dgSt = DugeonState.ManualPlaying;
                             break;
                         case 2: // 나가기
                             dgSt = DugeonState.DifficultySelect;
@@ -302,16 +330,22 @@ namespace Project_TextRPG
             dungeons[0].Def = 5;
             dungeons[0].Gold = 1000;
             dungeons[0].Exp = 5;
+            dungeons[0].snakeMapSize = (30, 30);
+            dungeons[0].snakeSpeed = 200;
             dungeons.Add(new Dungeon());
             dungeons[1].Name = "일반 던전";
             dungeons[1].Def = 11;
             dungeons[1].Gold = 1700;
             dungeons[1].Exp = 7;
+            dungeons[1].snakeMapSize = (20, 20);
+            dungeons[1].snakeSpeed = 150;
             dungeons.Add(new Dungeon());
             dungeons[2].Name = "어려운 던전";
             dungeons[2].Def = 17;
             dungeons[2].Gold = 2500;
             dungeons[2].Exp = 10;
+            dungeons[2].snakeMapSize = (10, 10);
+            dungeons[2].snakeSpeed = 100;
 
             // 난이도 선택지
             for (int i = 0; i < dungeons.Count; i++)

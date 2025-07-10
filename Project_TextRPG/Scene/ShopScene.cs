@@ -22,31 +22,32 @@ namespace Project_TextRPG
         List<Item> items;
         public override void ShowScene()
         {
+            sb.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("상점");
             Console.WriteLine("필요한 아이템을 구매 수 있습니다.");
             Console.ResetColor();
-            Console.WriteLine();
-            Console.WriteLine("[보유 골드]");
+            sb.Append("\n");
+            sb.Append("[보유 골드]\n");
             // 플레이어 골드 가져오기, 123대신 넣기
-            Console.WriteLine(Player.Instance.Gold + " G");
-            Console.WriteLine();
+            sb.Append(Player.Instance.Gold + " G\n");
+            sb.Append("\n");
             // 아이템 목록
-            Console.WriteLine("[아이템 목록]");
+            sb.Append("[아이템 목록]\n");
             // 선택 출력
             for (int i = 0; i < optionsLen; i++)
             {
                 // 마지막 두 줄 띄우기
-                if (i == optionsLen - 2) Console.WriteLine();
-                if (i == optionNum) Console.Write("▶");
-                else Console.Write("　");
+                if (i == optionsLen - 2) sb.Append("\n");
+                if (i == optionNum) sb.Append("▶");
+                else sb.Append("　");
 
-                Console.WriteLine(" " + options[i]);
+                sb.Append(" " + options[i] + "\n");
             }
 
-            Console.WriteLine();
-            Console.WriteLine("이동: 방향키, 구매:z, 돌아가기: x");
-
+            sb.Append("\n");
+            sb.Append("이동: 방향키, 구매:z, 돌아가기: x\n");
+            Console.Write(sb.ToString());
             SceneControl();
         }
         protected override void SceneControl()
