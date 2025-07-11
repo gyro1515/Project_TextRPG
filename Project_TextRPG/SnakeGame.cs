@@ -119,6 +119,8 @@ namespace Project_TextRPG
                     {
                         tmpTime = 0;
                         gameStartSte = GameStartState.GO;
+                        ControlManager.Instance.ClearInputBuffer(); // 상태 넘어 갈 떄 기존에 입력된 키값들 없애기
+
                     }
                     break;
                 case GameStartState.GO:
@@ -248,6 +250,7 @@ namespace Project_TextRPG
                 default:
                     break;
             }
+            ControlManager.Instance.ClearInputBuffer(); // 이동하고 기존에 입력된 키값들 없애기
             canInput = true;
         }
         void SetFood()

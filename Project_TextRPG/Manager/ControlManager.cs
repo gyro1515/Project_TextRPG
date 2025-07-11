@@ -70,6 +70,13 @@ namespace Project_TextRPG
             }
             return inputkey;
         }
+        public void ClearInputBuffer() // 씬 넘어가기전 현재 입력된 모든 입력 값 없애기
+        {
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true); // true: 입력값을 콘솔에 표시하지 않음
+            }
+        }
 
         // 콘솔 출력 너비 맞추기용
         public int GetDisplayWidth(string s)

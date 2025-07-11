@@ -111,13 +111,16 @@ namespace Project_TextRPG
             {
                 dgSt = DugeonState.Fail;
                 selectedDungeon.EndSnake(); // 스네이크 해제, 메모리 누수 심함....
+                ControlManager.Instance.ClearInputBuffer(); // 장면 넘어 갈 떄 기존에 입력된 키값들 없애기
             }
             else if (selectedDungeon.snake.gameOverSte == SnakeGame.GameOverState.Clear)// 성공
             {
                 dgSt = DugeonState.Clear;
                 selectedDungeon.EndSnake(); // 스네이크 해제, 메모리 누수 심함....
+                ControlManager.Instance.ClearInputBuffer(); // 장면 넘어 갈 떄 기존에 입력된 키값들 없애기
+
             }
-            
+
         }
         void ShowClear()
         {

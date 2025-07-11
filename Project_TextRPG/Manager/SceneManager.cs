@@ -71,6 +71,7 @@ namespace Project_TextRPG
                 // 씬 스테이트 세팅하면 씬 세팅 자동 초기화 해보기
                 sceneState = value;
                 scenes[sceneState].SetupScene();
+                ControlManager.Instance.ClearInputBuffer(); // 씬 넘어 갈 떄 기존에 입력된 키값들 없애기
             }
         }
         public Dictionary<SceneState, Scene> ScenesDict
