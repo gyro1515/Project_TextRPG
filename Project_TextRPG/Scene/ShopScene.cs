@@ -18,7 +18,7 @@ namespace Project_TextRPG
             LoadPlayerItem();
         }
 
-        // 아이템은 상점에 있어야??
+        // 아이템은 상점에 있어야?
         List<Item> items;
         public override void ShowScene()
         {
