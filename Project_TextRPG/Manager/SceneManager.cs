@@ -58,12 +58,9 @@ namespace Project_TextRPG
                 //Scene? tmp = scenes[sceneState];
                 // 현재 구현 기준 Dictionary에서 해당 키값 제거해야 함
                 //scenes.Remove(sceneState);
-                // 기존 씬 리소스 정리하고
-                //tmp.Dispose();
                 // 참조도 끊어 GC가 메모리 해제하게 하기
                 //tmp = null;
                 // 이런 방식으로 해제할거면 Scene? curScene을 선언해서 계속 할당과 해체해주기
-                // curScene.Dispose();
                 // curScene = null;
                 // switch로 value값에 따라 다음 씬 할당하기
                 // curScene = new 다음 씬();

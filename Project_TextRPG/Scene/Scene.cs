@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project_TextRPG
 {
-    internal class Scene : IDisposable
+    internal class Scene
     {
         protected List<string> options;
         protected int optionsLen = 0;
@@ -39,11 +39,6 @@ namespace Project_TextRPG
         public virtual void SetupScene()
         {
             //optionNum = 0; 어떤 씬은 초기화 안해줘도 됨
-        }
-
-        public virtual void Dispose()
-        {
-            
         }
     }
 }

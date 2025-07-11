@@ -14,7 +14,7 @@ namespace Project_TextRPG
     // 튜터님께서 텍스트 알피지 다 했으면
     // 강의 과제도 해보라고 하셔서 구현하게 되었다.
 
-    // 스네이크 게임을 while로 초당 60프레임을 구현하고,
+    // 스네이크 게임을 while로 초당 100프레임을 구현하고,
     // 또 동시에 게임이 끊기지 않게 멀티쓰레드로 입력값을 받아온다면
     // 보다 게임 엔진 시스템에 어울리는 과제가 되지 않을까 싶다.
     internal class SnakeGame
@@ -114,7 +114,7 @@ namespace Project_TextRPG
             switch (gameStartSte)
             {
                 case GameStartState.Ready:
-                    sb.Append("Ready\n");
+                    sb.Append("▶▶▶▶▶▶Ready◀◀◀◀◀◀\n");
                     if (tmpTime >= 1000) // 1초 뒤 시작
                     {
                         tmpTime = 0;
@@ -165,32 +165,9 @@ namespace Project_TextRPG
         {
             // 도달 점수 출력하기 위한...
             sb.Clear();
-
-            tmpTime += delta;
-
-            switch (gameStartSte)
-            {
-                case GameStartState.Ready:
-                    sb.Append("Ready\n");
-                    if (tmpTime >= 1000) // 1초 뒤 시작
-                    {
-                        tmpTime = 0;
-                        gameStartSte = GameStartState.GO;
-                    }
-                    break;
-                case GameStartState.GO:
-                    sb.Append($"현재 점수: {score},  목표 점수: {target}\n");
-                    if (tmpTime >= speed)
-                    {
-                        PlayerMove();
-                        tmpTime = 0;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            // 맵 출력 세팅 전에, 맵에 플레이어와 먹이 세팅해야 함
+            sb.Append($"현재 점수: {score},  목표 점수: {target}\n");
+            
+            // 맵 출력 세팅 
             for (int i = 0; i < y; i++)
             {
                 for (int j = 0; j < x; j++)
@@ -330,6 +307,10 @@ namespace Project_TextRPG
                     Thread.Sleep(1); // CPU 과다 점유 방지
                     continue;
                 }
+
+                // 키가 눌렸을 때만 키 입력 받기
+                if (!Console.KeyAvailable) continue;
+
                 var key = Console.ReadKey(true).Key;
 
                 switch (key)

@@ -43,9 +43,12 @@ namespace Project_TextRPG
             sb.Append("Lv. " + Player.Instance.Lv + "\n");
             sb.Append("Exp: " + Player.Instance.CurExp + " / " + Player.Instance.MaxExp + "\n");
             sb.Append("이름: " + Player.Instance.Name + "\n");
-            sb.Append("공격력: " + (Player.Instance.Atk + Player.Instance.PlusAtk) + addAtk + "\n");
+            /*sb.Append("공격력: " + (Player.Instance.Atk + Player.Instance.PlusAtk) + addAtk + "\n");
             sb.Append("방어력: " + (Player.Instance.Def + Player.Instance.PlusDef) + addDef + "\n");
-            sb.Append("체력: " + Player.Instance.CurHP + " / " + (Player.Instance.MaxHP + Player.Instance.PlusHP) + addHp + "\n");
+            sb.Append("체력: " + Player.Instance.CurHP + " / " + (Player.Instance.MaxHP + Player.Instance.PlusHP) + addHp + "\n");*/
+            sb.Append("공격력: " + (Player.Instance.TotalAtk) + addAtk + "\n");
+            sb.Append("방어력: " + (Player.Instance.TotalDef) + addDef + "\n");
+            sb.Append("체력: " + Player.Instance.CurHP + " / " + (Player.Instance.TotalMaxHp) + addHp + "\n");
             sb.Append("Gold: " + Player.Instance.Gold + " G" + "\n");
             sb.Append("\n");
             // 나가기 표시

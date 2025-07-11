@@ -11,7 +11,7 @@ namespace Project_TextRPG
     {
         public SellScene()
         {
-            options = new List<string>();
+            //options = new List<string>();
         }
         public override void ShowScene()
         {
