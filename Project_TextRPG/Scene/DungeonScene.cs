@@ -148,10 +148,12 @@ namespace Project_TextRPG
             Console.WriteLine($"Gold {beforeGold} G -> {Player.Instance.Gold} G");
             Console.WriteLine();
             //Console.WriteLine("▶ 0. 나가기");
-
+            Thread.Sleep(1000);
             Console.WriteLine();
             Console.WriteLine("계속하려면 아무 키나 눌러주세요.");
             ClearCtl();
+            Console.WriteLine("던전 입장으로 돌아갑니다.");
+            Thread.Sleep(1000);
         }
         void ShowFail()
         {
@@ -165,8 +167,11 @@ namespace Project_TextRPG
             Console.WriteLine("[탐험 결과]");
             Console.WriteLine($"체력 {beforeHp} -> {Player.Instance.CurHP}");
             Console.WriteLine();
+            Thread.Sleep(1000);
             Console.WriteLine("계속하려면 아무 키나 눌러주세요.");
             FailCtl();
+            Console.WriteLine("던전 입장으로 돌아갑니다.");
+            Thread.Sleep(1000);
         }
         protected override void SceneControl()
         {
