@@ -97,7 +97,7 @@ namespace Project_TextRPG
         }
         public override void SetupScene()
         {
-            base.SetupScene();
+            //base.SetupScene();
             SetItemString();
             optionNum = 0;
 

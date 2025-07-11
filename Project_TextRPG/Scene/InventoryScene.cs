@@ -78,7 +78,7 @@ namespace Project_TextRPG
         }
         public override void SetupScene()
         {
-            base.SetupScene(); // 부모것도 호출
+            //base.SetupScene(); // 부모것도 호출
             SetInventoryString();
             optionNum = 0;
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project_TextRPG
 {
-    internal class Scene
+    internal abstract class Scene
     {
         protected List<string> options;
         protected int optionsLen = 0;
@@ -27,15 +27,10 @@ namespace Project_TextRPG
             sb = new StringBuilder();
         }
 
-        public virtual void ShowScene()
-        {
-            Console.WriteLine("Empty");
-            //SceneControl();
-        }
-        protected virtual void SceneControl()
-        {
-            Console.WriteLine("No Ctl");
-        }
+        public abstract void ShowScene();
+
+        protected abstract void SceneControl();
+
         public virtual void SetupScene()
         {
             //optionNum = 0; 어떤 씬은 초기화 안해줘도 됨
